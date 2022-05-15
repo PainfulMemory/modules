@@ -1,0 +1,77 @@
+{
+  "moduleInfo": {
+    "apiVersion": 0.1,
+    "name": "KickAssAnime",
+    "acronym": "KAA",
+    "description": "Scrapes anime from kickassanime's website",
+    "version": 1.0,
+    "language": ["JPN", "ENG"],
+    "baseURL": "https://kickassanime.ro",
+    "developer": "PainfulMemory",
+    "developerURL": "https://github.com/PainfulMemory",
+    "moduleURL"https://raw.githubusercontent.com/PainfulMemory/modules/main/KAAv3.json?token=GHSAT0AAAAAABUKTTIW2YYH25JUDLYFJA3AYUAOSJQ",
+    "episodesRequired": false,
+    "searchRequired": true,
+    "dubIdentifier": " (dub)"
+},
+"global": {
+    "headers": {
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.4 Safari/605.1.15",
+        "Referer": "https://kickassanime.ro"
+    },
+    "seperator": "+",
+    "noResolve": []
+},
+"search": [{
+    "request": {
+        "url": "/data/searchdata-test.php",
+        "body": "anime=<ANIME_NAME>",
+        "method": "POST",
+        "headers": {
+            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.4 Safari/605.1.15",
+            "Referer": "https://kickassanime.ro",
+            "content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+        },
+        "mainBody": "getElement(\"span\")",
+        "items": {"itemSelector": "getElement(\"div.product__item\")",
+            "animeName": {
+                "animeName": "getElement(\"h5\").text",
+                "seperator": ""
+            },
+            "animeURL": {
+                "animeURL": "getElement(\"div.product__item__pic\").params.data-setbg",
+                "seperator": "getRegex(\".*\/(.*)\\.\").lower"
+            },
+            "yearInfo": {
+                "animeYear": "getElement(\"div.ep\").text",
+                "seperator": ""
+            },
+            "urlExtras": {
+                "animeURL": "baseURL + '/watch?name=' + animeURL + '&episode=' + '<EPNUMB>'"
+            }
+        }
+    }
+}],
+"sources": [{
+    "request": {
+        "url": "animeURL",
+        "method": "GET",
+        "headers": {
+            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.4 Safari/605.1.15",
+            "Referer": "https://kickassanime.ro"
+        },
+        "mainBody": "getElement(\"div.anime__video__player\")",
+        "items": {
+            "itemSelector": "getElement(\"iframe\")",
+            "sourceName": {
+                "sourceName": "getElement(\" \").text",
+                "seperator": ""
+            },
+            "sourceURL": {
+                "sourceURL": "getElement(\" \").params.src",
+                "seperator": ""
+            }
+        }
+    }
+}]
+}
