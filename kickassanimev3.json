@@ -9,7 +9,7 @@
     "baseURL": "https://kickassanime.ro",
     "developer": "PainfulMemory",
     "developerURL": "https://github.com/PainfulMemory",
-    "moduleURL": "https://raw.githubusercontent.com/PainfulMemory/modules/main/kickassanimev3.json?token=GHSAT0AAAAAABUKTTIW2RNG3NWOUH66HDMKYUAQQEQ",
+    "moduleURL": "https://raw.githubusercontent.com/PainfulMemory/modules/main/kickassanimev3.json",
     "searchRequired": true,
     "episodesRequired": false,
     "dubIdentifier": " (dub)"
